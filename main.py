@@ -15,8 +15,9 @@ h.reset()
 
 env = gym.make("gym_pycre:pycre-v0", hetnet=h)
 model = A2C("MlpPolicy", env, verbose=1, policy_kwargs=dict(optimizer_class=RMSpropTFLike,
-                                                            optimizer_kwargs=dict(eps=1e-5)))
-model.learn(total_timesteps=25000)
+                                                            optimizer_kwargs=dict(eps=1e-5),
+                                                            net_arch=[128, 128]))
+model.learn(total_timesteps=100000)
 
 obs = env.reset()
 action, _states = model.predict(obs)
