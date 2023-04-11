@@ -1,5 +1,4 @@
 import gym
-import numpy
 from stable_baselines3 import A2C
 from stable_baselines3.common.sb2_compat.rmsprop_tf_like import RMSpropTFLike
 
