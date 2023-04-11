@@ -1,6 +1,7 @@
 import gym
 import numpy
 from stable_baselines3 import A2C
+from stable_baselines3.common.sb2_compat.rmsprop_tf_like import RMSpropTFLike
 
 from network.hetnet import HetNet
 
@@ -14,8 +15,9 @@ print(h.evaluation)
 h.reset()
 
 env = gym.make("gym_pycre:pycre-v0", hetnet=h)
-model = A2C("MlpPolicy", env, verbose=1)
-model.learn(total_timesteps=5000)
+model = A2C("MlpPolicy", env, verbose=1, policy_kwargs=dict(optimizer_class=RMSpropTFLike,
+                                                            optimizer_kwargs=dict(eps=1e-5)))
+model.learn(total_timesteps=25000)
 
 obs = env.reset()
 action, _states = model.predict(obs)
