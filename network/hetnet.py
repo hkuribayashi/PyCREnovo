@@ -90,6 +90,7 @@ class HetNet:
     def __apply_bias(self, bias):
         for linha in self.matrix:
             for id_, ne in enumerate(linha):
+                # TODO: Corrigir isso aqui (Gambiarra)
                 if ne.bs.type == "SBS":
                     ne.bias = bias[id_-1]
                     ne.biased_sinr += bias[id_-1]
