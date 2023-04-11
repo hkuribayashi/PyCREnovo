@@ -1,0 +1,5 @@
+stable_baselines3
+gym~=0.21.0
+matplotlib~=3.3.4
+numpy~=1.19.5
+setuptools~=54.2.0
