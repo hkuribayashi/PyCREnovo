@@ -7,8 +7,8 @@ class PyCREEnv(Env):
         self.hetnet = kwargs["hetnet"]
         self.current_state = int(self.hetnet.evaluation['satisfaction'])
         self.observation_space = spaces.Discrete(101)
-        self.action_space = spaces.Box(low=np.array([-10.0, -10.0, -10.0, -10.0, -10.0, -10.0, -10.0, -10.0, -10.0]),
-                                       high=np.array([80.0, 80.0, 80.0, 80.0, 80.0, 80.0, 80.0, 80.0, 80.0]),
+        self.action_space = spaces.Box(low=np.array([20.0, 20.0, 20.0, 20.0, 20.0, 20.0, 20.0, 20.0, 20.0]),
+                                       high=np.array([60.0, 60.0, 60.0, 60.0, 60.0, 60.0, 60.0, 60.0, 60.0]),
                                        dtype=np.float32)
 
     def step(self, action):
