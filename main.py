@@ -34,6 +34,9 @@ else:
     # Treinamento do Modelo Novo
     model.learn(total_timesteps=100000)
 
+    # Salva o Modelo Treinado
+    model.save(path)
+
 # Reseta o Ambiente
 obs = env.reset()
 
