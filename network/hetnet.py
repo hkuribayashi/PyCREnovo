@@ -94,6 +94,7 @@ class HetNet:
                 if ne.bs.type == "SBS":
                     ne.bias = bias[id_-1]
                     ne.biased_sinr += bias[id_-1]
+                ne.bs.load = 0
 
     '''
     Este método realiza a associação entre UEs e BSs.

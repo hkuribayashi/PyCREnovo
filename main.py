@@ -47,9 +47,6 @@ print(action)
 # Aplica a ação gerada
 h.run(action)
 
-# Recupera as informações de Satisfação
-obs, rewards, dones, info = env.step(action)
-print(info)
+h.debug("initial1.png")
 
-# Rederiza o Gráfico Final de Associação
-env.render()
+print(h.evaluation)
