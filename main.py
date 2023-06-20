@@ -48,3 +48,4 @@ for i in range(100):
         print(action)
         print("Obs: {} | info: {}".format(obs, info))
 env.render()
+
