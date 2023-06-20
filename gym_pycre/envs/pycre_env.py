@@ -7,8 +7,8 @@ class PyCREEnv(Env):
         self.hetnet = kwargs["hetnet"]
         self.current_state = int(self.hetnet.evaluation['satisfaction'])
         self.observation_space = spaces.Discrete(101)
-        self.action_space = spaces.Box(low=np.array([20.0, 20.0, 20.0, 20.0, 20.0, 20.0, 20.0, 20.0, 20.0]),
-                                       high=np.array([60.0, 60.0, 60.0, 60.0, 60.0, 60.0, 60.0, 60.0, 60.0]),
+        self.action_space = spaces.Box(low=np.array([20.0, 20.0, 20.0, 20.0, 20.0, 20.0, 20.0, 20.0, 20.0, 20.0, 20.0]),
+                                       high=np.array([80.0, 80.0, 80.0, 80.0, 80.0, 80.0, 80.0, 80.0, 80.0, 80.0, 80.0]),
                                        dtype=np.float32)
 
     def step(self, action):
@@ -16,13 +16,13 @@ class PyCREEnv(Env):
         new_state = int(self.hetnet.evaluation['satisfaction'])
         if new_state > self.current_state:
             # Bonificação do Agente
-            reward = 1000.0
+            reward = 3000.0
         else:
             # Penalização do Agente
             reward = -1000.0
 
         done = False
-        if new_state >= 95:
+        if new_state >= 99:
             done = True
 
         info = self.hetnet.evaluation

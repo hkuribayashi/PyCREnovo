@@ -32,7 +32,7 @@ else:
                                                                 optimizer_kwargs=dict(eps=1e-5),
                                                                 net_arch=[128, 128]))
     # Treinamento do Modelo Novo
-    model.learn(total_timesteps=100000)
+    model.learn(total_timesteps=10000)
 
     # Salva o Modelo Treinado
     model.save(path)
@@ -41,12 +41,10 @@ else:
 obs = env.reset()
 
 # Obtém uma ação a partir do estado atual (obs)
-action, _states = model.predict(obs)
-print(action)
-
-# Aplica a ação gerada
-h.run(action)
-
-h.debug("initial1.png")
-
-print(h.evaluation)
+for i in range(100):
+    action, _states = model.predict(obs)
+    obs, rewards, dones, info = env.step(action)
+    if i % 10 == 0:
+        print(action)
+        print("Obs: {} | info: {}".format(obs, info))
+env.render()
