@@ -8,6 +8,9 @@ from network.bs import BS
 from network.point import Point
 from network.ue import UE
 
+random.seed(10)
+np.random.seed(10)
+
 
 def get_ippp(simulation_area, lambda0, thinning_probability=0.4):
     side_length = np.sqrt(simulation_area)/2
@@ -48,7 +51,7 @@ def generate_bs(n_sbs):
 
     # Gerando novas SBSs
     lado = math.sqrt(Network.DEFAULT.simulation_area) / 2
-    for id_ in range(2, n_sbs):
+    for id_ in range(1, n_sbs):
         x = random.uniform(-lado, lado)
         y = random.uniform(-lado, lado)
         p_x = Point(x, y, Network.DEFAULT.sbs_height)
