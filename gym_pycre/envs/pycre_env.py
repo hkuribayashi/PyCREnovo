@@ -11,9 +11,9 @@ class PyCREEnv(Env):
                                             high=np.array(
                                                 [20.0, 20.0, 20.0, 20.0, 20.0, 20.0, 20.0, 20.0, 20.0, 20.0, 20.0]),
                                             dtype=np.float64)
-        self.action_space = spaces.Box(low=np.array([30.0, 20.0, 20.0, 20.0, 20.0, 20.0, 20.0, 20.0, 20.0, 20.0, -20.0]),
+        self.action_space = spaces.Box(low=np.array([-20.0, 20.0, 20.0, 20.0, 20.0, 20.0, 20.0, 20.0, 20.0, 20.0, 20.0]),
                                        high=np.array(
-                                           [80.0, 80.0, 80.0, 80.0, 80.0, 80.0, 80.0, 80.0, 80.0, 80.0, 0.0]),
+                                           [10.0, 80.0, 80.0, 80.0, 80.0, 80.0, 80.0, 80.0, 80.0, 80.0, 8.0]),
                                        dtype=np.float64)
 
     def get_state(self):
@@ -47,5 +47,5 @@ class PyCREEnv(Env):
         self.current_state = self.get_state()
         return self.current_state
 
-    def render(self, mode="human"):
-        self.hetnet.debug("initial1.png")
+    def render(self, i, mode="human"):
+        self.hetnet.debug("final{}.png".format(i))
