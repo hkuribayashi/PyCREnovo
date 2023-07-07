@@ -43,7 +43,7 @@ class PyCREEnv(Env):
         return new_state, reward, done, info
 
     def reset(self):
-        self.hetnet.reset()
+        # self.hetnet.reset()
         self.current_state = self.get_state()
         return self.current_state
 

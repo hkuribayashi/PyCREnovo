@@ -14,8 +14,6 @@ h = HetNet()
 # Executa a HetNet
 h.run()
 h.debug("initial0.png")
-print(h.evaluation)
-h.reset()
 
 # Criação do Ambiente
 env = gym.make("gym_pycre:pycre-v0", hetnet=h)
@@ -33,13 +31,14 @@ else:
                                                                 optimizer_kwargs=dict(eps=1e-5),
                                                                 net_arch=[256, 256]))
     # Treinamento do Modelo Novo
-    model.learn(total_timesteps=20000)
+    model.learn(total_timesteps=250000)
 
     # Salva o Modelo Treinado
     model.save(path)
 
 # Reseta o Ambiente
 obs = env.reset()
+print("Initial Observation State: {}".format(obs))
 
 # Obtém uma ação a partir do estado atual (obs)
 for i in range(100):
