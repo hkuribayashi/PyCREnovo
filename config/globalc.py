@@ -4,7 +4,7 @@ from enum import Enum
 
 class GlobalConfig(Enum):
 
-    DEFAULT = ("/Users/hugo/PyCRE5G", 600)
+    DEFAULT = ("/Users/gustavo/Documents/prog/python/PyCREnovo", 600)
 
     def __init__(self, base_path, image_resolution):
         if os.path.exists(base_path):
