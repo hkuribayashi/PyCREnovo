@@ -1,5 +1,5 @@
 import os
-
+from utils.utils import  coletar_satisfacao
 import gym
 from stable_baselines3 import A2C
 from stable_baselines3.common.sb2_compat.rmsprop_tf_like import RMSpropTFLike
@@ -8,7 +8,7 @@ from config.globalc import GlobalConfig
 from network.hetnet import HetNet
 
 simulacoes = 10
-
+media_satisfaction = []
 for i in range(simulacoes):
     # Criando uma nova HetNet com configurações padrão
     h = HetNet()
@@ -35,7 +35,7 @@ for i in range(simulacoes):
                                                                     optimizer_kwargs=dict(eps=1e-5),
                                                                     net_arch=[256, 256]))
         # Treinamento do Modelo Novo
-        model.learn(total_timesteps=250000)
+        model.learn(total_timesteps=100)
 
         # Salva o Modelo Treinado
         model.save(path)
@@ -48,3 +48,11 @@ for i in range(simulacoes):
     print("Action: {}".format(action))
     print("Obs: {} | info: {}".format(obs, info))
     env.render()
+
+    # guardando em um arquivo CSV
+    media_satisfaction.append(info['satisfaction'])
+
+    if i == 9:
+        coletar_satisfacao('A2C_media', media_satisfaction)
+
+

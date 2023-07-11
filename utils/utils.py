@@ -1,12 +1,16 @@
 import math
 import random
-
+import csv
 import numpy as np
+import os
 
 from config.network import Network
 from network.bs import BS
 from network.point import Point
 from network.ue import UE
+
+random.seed(10)
+np.random.seed(10)
 
 
 def get_ippp(simulation_area, lambda0, thinning_probability=0.4):
@@ -48,7 +52,7 @@ def generate_bs(n_sbs):
 
     # Gerando novas SBSs
     lado = math.sqrt(Network.DEFAULT.simulation_area) / 2
-    for id_ in range(2, n_sbs):
+    for id_ in range(1, n_sbs):
         x = random.uniform(-lado, lado)
         y = random.uniform(-lado, lado)
         p_x = Point(x, y, Network.DEFAULT.sbs_height)
@@ -132,3 +136,22 @@ def get_efficiency(sinr):
         efficiency = 5.55
 
     return efficiency
+
+
+def coletar_satisfacao(name, data):
+        caminho_pasta = os.path.join(os.getcwd(), 'satisfacao_csv')
+        if not os.path.exists(caminho_pasta):
+         os.makedirs(caminho_pasta)
+        
+        caminho_arquivo = os.path.join(caminho_pasta,'{}.csv'.format(name))
+
+        data  = sum(data) / len(data)
+
+        # Abrindo o arquivo CSV em modo de escrita
+        with open(caminho_arquivo, 'w', newline='') as arquivo_csv:
+            writer = csv.writer(arquivo_csv)
+
+            # Escrevendo a média no arquivo CSV
+            writer.writerow([data])
+
+        print("A média foi calculada e salva no arquivo CSV.") 

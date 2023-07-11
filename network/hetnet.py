@@ -91,9 +91,11 @@ class HetNet:
         for linha in self.matrix:
             for id_, ne in enumerate(linha):
                 # TODO: Corrigir isso aqui (Gambiarra)
-                if ne.bs.type == "SBS":
-                    ne.bias = bias[id_-1]
-                    ne.biased_sinr += bias[id_-1]
+                ne.bias = bias[id_]
+                ne.biased_sinr += bias[id_]
+                # if ne.bs.type == "SBS":
+                #     ne.bias = bias[id_-1]
+                #     ne.biased_sinr += bias[id_-1]
                 ne.bs.load = 0
 
     '''
@@ -179,3 +181,9 @@ class HetNet:
 
     def debug(self, filename):
         get_visual(self, filename)
+
+    def get_(self):
+        state = list()
+        for bs in self.bs_list:
+            state.append(bs.load)
+        return state
