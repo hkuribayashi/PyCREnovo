@@ -1,7 +1,8 @@
 import math
 import random
-
+import csv
 import numpy as np
+import os
 
 from config.network import Network
 from network.bs import BS
@@ -135,3 +136,22 @@ def get_efficiency(sinr):
         efficiency = 5.55
 
     return efficiency
+
+
+def coletar_satisfacao(name, data):
+        caminho_pasta = os.path.join(os.getcwd(), 'satisfacao_csv')
+        if not os.path.exists(caminho_pasta):
+         os.makedirs(caminho_pasta)
+        
+        caminho_arquivo = os.path.join(caminho_pasta,'{}.csv'.format(name))
+
+        data  = sum(data) / len(data)
+
+        # Abrindo o arquivo CSV em modo de escrita
+        with open(caminho_arquivo, 'w', newline='') as arquivo_csv:
+            writer = csv.writer(arquivo_csv)
+
+            # Escrevendo a média no arquivo CSV
+            writer.writerow([data])
+
+        print("A média foi calculada e salva no arquivo CSV.") 
