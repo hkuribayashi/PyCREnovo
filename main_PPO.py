@@ -1,6 +1,5 @@
 import os
 from utils.utils import  coletar_satisfacao
-
 import gym
 from stable_baselines3 import PPO
 from stable_baselines3.common.sb2_compat.rmsprop_tf_like import RMSpropTFLike
@@ -11,7 +10,6 @@ from network.hetnet import HetNet
 
 simulacoes = 10
 media_satisfaction = []
-
 for i in range(simulacoes):
     # Criando uma nova HetNet com configurações padrão
     h = HetNet()
@@ -19,7 +17,7 @@ for i in range(simulacoes):
     # Executa a HetNet
     h.run()
     print(h.evaluation)
-    print("Load: {}".format(h.get_()))
+    print("Load: {}".format(h.get_load()))
     h.debug("initial{}.png".format(i))
 
     # Criação do Ambiente
@@ -38,7 +36,7 @@ for i in range(simulacoes):
                                                                     optimizer_kwargs=dict(eps=1e-5),
                                                                     net_arch=[256, 256]))
         # Treinamento do Modelo Novo
-        model.learn(total_timesteps=100)
+        model.learn(total_timesteps=100000)
 
         # Salva o Modelo Treinado
         model.save(path)
@@ -52,7 +50,7 @@ for i in range(simulacoes):
     print("Obs: {} | info: {}".format(obs, info))
     env.render()
 
-    # guardando em um arquivo CSV
+     # guardando em um arquivo CSV
     media_satisfaction.append(info['satisfaction'])
 
     if i == 9:

@@ -4,7 +4,6 @@ import matplotlib.pyplot as plt
 from matplotlib.lines import Line2D
 
 from config.network import Network
-from config.globalc import GlobalConfig
 
 
 def get_visual(hetnet, filename):
@@ -53,6 +52,6 @@ def get_visual(hetnet, filename):
     ax.legend(handles=legend_elements, loc='upper right')
     plt.tight_layout()
 
-    path = os.path.join(GlobalConfig.DEFAULT.base_path, "images", filename)
+    path = os.path.join(hetnet.config.image_path, filename)
     plt.savefig(os.path.join(path), dpi=Network.DEFAULT.image_resolution)
     plt.close()

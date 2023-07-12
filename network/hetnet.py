@@ -3,6 +3,7 @@ import math
 import numpy as np
 from operator import attrgetter
 
+from config.globalc import GlobalConfig
 from config.network import Network
 from network.ne import NetworkElement
 from utils import utils
@@ -11,7 +12,7 @@ from utils.utils import get_pathloss, get_efficiency
 
 
 class HetNet:
-    def __init__(self, n_sbs=11, ue_density=300):
+    def __init__(self, config, n_sbs=11, ue_density=300):
         # Lista de UEs
         self.ue_list = utils.generate_ues(ue_density)
 
@@ -23,6 +24,9 @@ class HetNet:
 
         # Inicializa um dicionário para armazenar os resultados da simulação
         self.evaluation = dict()
+
+        # Guarda as configurações
+        self.config = config
 
     '''
     Gera a matriz de NetworkElements a patir das listas de UEs e BSs
@@ -182,7 +186,7 @@ class HetNet:
     def debug(self, filename):
         get_visual(self, filename)
 
-    def get_(self):
+    def get_load(self):
         state = list()
         for bs in self.bs_list:
             state.append(bs.load)
