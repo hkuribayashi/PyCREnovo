@@ -142,4 +142,4 @@ def get_efficiency(sinr):
 
 def coletar_satisfacao(name, path, data):
     resultados = pd.DataFrame(data, columns=['satisfaction'])
-    resultados.to_csv(os.path.join(path, name), index=False)
+    resultados.to_csv(os.path.join(path, "{}.csv".format(name)), index=False)

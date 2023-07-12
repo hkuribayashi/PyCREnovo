@@ -16,6 +16,9 @@ class GlobalConfig:
         if not os.path.exists(self.model_path):
             os.makedirs(self.model_path)
 
+        if not os.path.exists(self.csv_path):
+            os.makedirs(self.csv_path)
+
         if image_resolution is None or not isinstance(image_resolution, int):
             raise RuntimeError('The parameter image_resolution should be a int value: {}'.format(image_resolution))
         else:

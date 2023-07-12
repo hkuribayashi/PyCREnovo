@@ -18,7 +18,7 @@ for i in range(simulacoes):
     # Executa a HetNet
     h.run()
     print(h.evaluation)
-    print("Load: {}".format(h.get_()))
+    print("Load: {}".format(h.get_load()))
     h.debug("initial{}.png".format(i))
 
     # Criação do Ambiente

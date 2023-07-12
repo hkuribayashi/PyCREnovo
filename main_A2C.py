@@ -8,21 +8,23 @@ from config.globalc import GlobalConfig
 from network.hetnet import HetNet
 from utils.utils import coletar_satisfacao
 
-simulacoes = 10
+simulacoes = 100
 satisfaction = []
 model_name = "a2c"
 config = GlobalConfig()
 
 
 for i in range(simulacoes):
+    # Inicio da Simulação
+    print("Simulação {}:".format(i))
+
     # Criando uma nova HetNet com configurações padrão
-    # Trocar de acordo com quem roda a aplicação
     h = HetNet(config=config)
 
     # Executa a HetNet
     h.run()
-    print(h.evaluation)
-    print("Load: {}".format(h.get_()))
+    print("Satisfação Inicial: {}".format(h.evaluation['satisfaction']))
+    print("Load Inicial: {}".format(h.get_load()))
     h.debug("initial_{}_{}.png".format(model_name, i))
 
     # Criação do Ambiente
@@ -50,13 +52,15 @@ for i in range(simulacoes):
 
     action, _states = model.predict(obs, deterministic=True)
     obs, rewards, dones, info = env.step(action)
-    print("Action: {}".format(action))
-    print("Obs: {} | info: {}".format(obs, info))
+    print("Satisfação Final: {}".format(info['satisfaction']))
+    print("Load Final: {}".format(obs))
     output = "{}_{}".format(model_name, i)
     env.render(model_name=output)
 
     # guardando em uma lista
     satisfaction.append(info['satisfaction'])
+
+    print()
 
 # Encerra a simulação e exporta os resultados em um arquivo CSV
 coletar_satisfacao('{}'.format(model_name), config.csv_path, satisfaction)

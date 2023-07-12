@@ -186,7 +186,7 @@ class HetNet:
     def debug(self, filename):
         get_visual(self, filename)
 
-    def get_(self):
+    def get_load(self):
         state = list()
         for bs in self.bs_list:
             state.append(bs.load)
