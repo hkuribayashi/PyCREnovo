@@ -10,11 +10,11 @@ class PyCREEnv(Env):
         self.observation_space = spaces.Box(low=np.array([0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]),
                                             high=np.array(
                                                 [20.0, 20.0, 20.0, 20.0, 20.0, 20.0, 20.0, 20.0, 20.0, 20.0, 20.0]),
-                                            dtype=np.float64)
+                                            dtype=np.float32)
         self.action_space = spaces.Box(low=np.array([-20.0, 20.0, 20.0, 20.0, 20.0, 20.0, 20.0, 20.0, 20.0, 20.0, 20.0]),
                                        high=np.array(
                                            [10.0, 80.0, 80.0, 80.0, 80.0, 80.0, 80.0, 80.0, 80.0, 80.0, 8.0]),
-                                       dtype=np.float64)
+                                       dtype=np.float32)
 
     def get_state(self):
         state = list()
