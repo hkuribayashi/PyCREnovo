@@ -8,7 +8,7 @@ from config.globalc import GlobalConfig
 from network.hetnet import HetNet
 from utils.utils import coletar_satisfacao
 
-simulacoes = 5
+simulacoes = 100
 satisfaction = []
 model_name = "PPO"
 config = GlobalConfig()
@@ -42,7 +42,7 @@ for i in range(simulacoes):
                                                                     optimizer_kwargs=dict(eps=1e-5),
                                                                     net_arch=[256, 256]))
         # Treinamento do Modelo Novo
-        model.learn(total_timesteps=100)
+        model.learn(total_timesteps=100000)
 
         # Salva o Modelo Treinado
         model.save(path)
