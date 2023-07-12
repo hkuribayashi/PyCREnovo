@@ -10,7 +10,7 @@ from utils.utils import coletar_satisfacao
 
 simulacoes = 100
 satisfaction = []
-model_name = "a2c"
+model_name = "A2C"
 config = GlobalConfig()
 
 
@@ -42,7 +42,7 @@ for i in range(simulacoes):
                                                                     optimizer_kwargs=dict(eps=1e-5),
                                                                     net_arch=[256, 256]))
         # Treinamento do Modelo Novo
-        model.learn(total_timesteps=10000)
+        model.learn(total_timesteps=100000)
 
         # Salva o Modelo Treinado
         model.save(path)
