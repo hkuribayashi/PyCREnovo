@@ -1,19 +1,20 @@
 import os
-from enum import Enum
+from pathlib import Path
 
 
-class GlobalConfig(Enum):
+class GlobalConfig:
 
-    DEFAULT = ("/Users/gustavo/Documents/prog/python/PyCREnovo", 600)
+    def __init__(self, image_resolution=600):
+        self.base_path = os.path.join(Path.cwd(), "output")
+        self.image_path = os.path.join(self.base_path, "images")
+        self.model_path = os.path.join(self.base_path, "models")
+        self.csv_path = os.path.join(self.base_path, "csv")
 
-    def __init__(self, base_path, image_resolution):
-        if os.path.exists(base_path):
-            self.base_path = base_path
-            self.dcm_path = os.path.join(base_path, "dcm")
-            self.iom_path = os.path.join(base_path, "iom")
-            self.rlm_path = os.path.join(base_path, "rlm")
-        else:
-            raise IOError("Base path not found: {}".format(base_path))
+        if not os.path.exists(self.image_path):
+            os.makedirs(self.image_path)
+
+        if not os.path.exists(self.model_path):
+            os.makedirs(self.model_path)
 
         if image_resolution is None or not isinstance(image_resolution, int):
             raise RuntimeError('The parameter image_resolution should be a int value: {}'.format(image_resolution))

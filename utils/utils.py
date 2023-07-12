@@ -1,8 +1,10 @@
+import os
+import csv
 import math
 import random
-import csv
 import numpy as np
-import os
+import pandas as pd
+
 
 from config.network import Network
 from network.bs import BS
@@ -14,7 +16,7 @@ np.random.seed(10)
 
 
 def get_ippp(simulation_area, lambda0, thinning_probability=0.4):
-    side_length = np.sqrt(simulation_area)/2
+    side_length = np.sqrt(simulation_area) / 2
 
     x_min = -1
     x_max = 1
@@ -138,20 +140,6 @@ def get_efficiency(sinr):
     return efficiency
 
 
-def coletar_satisfacao(name, data):
-        caminho_pasta = os.path.join(os.getcwd(), 'satisfacao_csv')
-        if not os.path.exists(caminho_pasta):
-         os.makedirs(caminho_pasta)
-        
-        caminho_arquivo = os.path.join(caminho_pasta,'{}.csv'.format(name))
-
-        data  = sum(data) / len(data)
-
-        # Abrindo o arquivo CSV em modo de escrita
-        with open(caminho_arquivo, 'w', newline='') as arquivo_csv:
-            writer = csv.writer(arquivo_csv)
-
-            # Escrevendo a média no arquivo CSV
-            writer.writerow([data])
-
-        print("A média foi calculada e salva no arquivo CSV.") 
+def coletar_satisfacao(name, path, data):
+    resultados = pd.DataFrame(data, columns=['satisfaction'])
+    resultados.to_csv(os.path.join(path, name), index=False)

@@ -47,5 +47,5 @@ class PyCREEnv(Env):
         self.current_state = self.get_state()
         return self.current_state
 
-    def render(self, i, mode="human"):
-        self.hetnet.debug("final{}.png".format(i))
+    def render(self, mode="human", **kwargs):
+        self.hetnet.debug("final_{}.png".format(kwargs['model_name']))
