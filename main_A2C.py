@@ -25,7 +25,8 @@ for i in range(simulacoes):
     h.run()
     print("Satisfação Inicial: {}".format(h.evaluation['satisfaction']))
     print("Load Inicial: {}".format(h.get_load()))
-    h.debug("initial_{}_{}.png".format(model_name, i))
+    if i % 10 == 0:
+        h.debug("initial_{}_{}.png".format(model_name, i))
 
     # Criação do Ambiente
     env = gym.make("gym_pycre:pycre-v0", hetnet=h)
@@ -54,8 +55,9 @@ for i in range(simulacoes):
     obs, rewards, dones, info = env.step(action)
     print("Satisfação Final: {}".format(info['satisfaction']))
     print("Load Final: {}".format(obs))
-    output = "{}_{}".format(model_name, i)
-    env.render(model_name=output)
+    if i % 10 == 0:
+        output = "{}_{}".format(model_name, i)
+        env.render(model_name=output)
 
     # guardando em uma lista
     satisfaction.append(info['satisfaction'])
