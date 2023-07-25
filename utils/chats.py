@@ -8,16 +8,17 @@ from config.network import Network
 
 def get_visual(hetnet, filename):
     # Legend
-    legend_elements = [Line2D([0], [0], marker='o', color='w', label='MBS', markerfacecolor='b', markersize=10),
-                       Line2D([0], [0], marker='o', color='w', label='SBS', markerfacecolor='g', markersize=10),
-                       Line2D([0], [0], marker='o', color='w', label='UE', markerfacecolor='r', markersize=10)]
+    legend_elements = [Line2D([0], [0], marker='o', color='w', label='MBS', markerfacecolor='b', markersize=7),
+                       Line2D([0], [0], marker='o', color='w', label='SBS', markerfacecolor='g', markersize=7),
+                       Line2D([0], [0], marker='o', color='w', label='UE Ordinary', markerfacecolor='black', markersize=7),
+                       Line2D([0], [0], marker='o', color='w', label='UE Priority', markerfacecolor='brown', markersize=7)]
 
     # Create figure
     fig = plt.figure()
     ax = fig.add_subplot(1, 1, 1)
 
     plt.xlim(-505, 520)
-    plt.ylim(-505, 520)
+    plt.ylim(-515, 515)
     plt.grid(linestyle='-', linewidth=1, zorder=0, color='#E5E5E5')
 
     for linha_ue in hetnet.matrix:
@@ -49,7 +50,12 @@ def get_visual(hetnet, filename):
             ue_circle = plt.Circle(p, 13.5, color="green", zorder=10)
         ax.add_patch(ue_circle)
 
-    ax.legend(handles=legend_elements, loc='upper right')
+    #ax.legend(handles=legend_elements, loc='upper left')
+
+
+    box = ax.get_position()
+    ax.set_position([box.x0, box.y0, box.width * 0.8, box.height])
+    ax.legend(handles=legend_elements, bbox_to_anchor=(0.95, -0.05), fancybox=True, shadow=True, ncol=4)
     plt.tight_layout()
 
     path = os.path.join(hetnet.config.image_path, filename)

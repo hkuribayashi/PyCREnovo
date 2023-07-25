@@ -11,8 +11,8 @@ from network.bs import BS
 from network.point import Point
 from network.ue import UE
 
-random.seed(10)
-np.random.seed(10)
+# random.seed(10)
+# np.random.seed(10)
 
 
 def get_ippp(simulation_area, lambda0, thinning_probability=0.4):
